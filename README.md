@@ -18,7 +18,7 @@ $env:RAINMUSIC_MUSIC_PATH = 'C:\Music\track.mp3'
 Запустите трек на странице и перемотайте вперёд и назад. Чтобы проверить HTTP Range отдельно, выполните в другом окне PowerShell следующую команду с MP3 размером больше 1024 байт.
 
 ```powershell
-curl.exe -sS -D - -H "Range: bytes=0-1023" -o NUL -w "Received: %{size_download} bytes\n" http://localhost:8000/music
+curl.exe -sS -D - -H "Range: bytes=0-1023" -o NUL -w "Received: %{size_download} bytes\n" http://localhost:8000/api/music
 ```
 
 Ожидается `206 Partial Content`, `Content-Range: bytes 0-1023/N`, где `N` — размер файла, и 1024 полученных байта.
