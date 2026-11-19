@@ -1,3 +1,5 @@
 spring:
   application:
     name: RainMusic
+server:
+  port: ${SERVER_PORT:8000}
