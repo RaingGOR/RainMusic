@@ -1,11 +1,9 @@
 package ru.raingor.rainmusic.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.raingor.rainmusic.services.MusicService;
 
 @RestController
@@ -15,8 +13,14 @@ public class MusicController {
     private final MusicService musicService;
 
     @GetMapping
-    public ResponseEntity<?> getMusicPlayer() {
-        return musicService.getMusicByPathFromENV();
+    public ResponseEntity<String[]> getMusicPlayer() {
+        return new ResponseEntity<>(musicService.getAllMusic(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<String[]> syncLibrary() {
+        musicService.syncLibrary();
+        return getMusicPlayer();
     }
 
     @GetMapping("/{audio_path}")
